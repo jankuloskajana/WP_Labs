@@ -7,4 +7,7 @@ import java.util.List;
 public interface BookRepository {
     List<Book> findAll();
     List<Book> searchBooks(String text, Double rating);
+    Book findById(Long id);
+    void delete(Long id);
+    Book save(Book book);
 }

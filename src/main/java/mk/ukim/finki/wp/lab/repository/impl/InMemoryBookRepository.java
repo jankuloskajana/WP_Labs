@@ -22,4 +22,22 @@ public class InMemoryBookRepository implements BookRepository {
                                 (rating != null && b.getAverageRating() >= rating))
                 .toList();
     }
+
+    @Override
+    public Book findById(Long id) {
+        return DataHolder.books.stream().filter(b -> b.getId().equals(id)).findFirst().orElse(null);
+    }
+
+    @Override
+    public void delete(Long id) {
+        DataHolder.books.removeIf(m -> m.getId().equals(id));
+    }
+
+    @Override
+    public Book save(Book book) {
+//        DataHolder.books.removeIf(m -> m.getId().equals(book.getId()));
+        delete(book.getId());
+        DataHolder.books.add(book);
+        return book;
+    }
 }
