@@ -7,4 +7,6 @@ import java.util.List;
 public interface AuthorRepository {
     List<Author> findAll();
     Author findById(Long id);
+    void delete(Long id);
+    Author save(Author author);
 }

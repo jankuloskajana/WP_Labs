@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.w3.org/1999/xhtml"
+>
+<head>
+  <meta charset="utf-8">
+  <title>Book Reservation - Welcome and choose a Book</title>
+  <style type="text/css">
+    body {
+      width: 800px;
+      margin: auto;
+      font-family: Arial, sans-serif;
+    }
+
+    h1 {
+      color: #333;
+    }
+
+    form {
+      margin-top: 20px;
+    }
+
+  </style>
+</head>
+<body>
+<header>
+  <h1>List of all Authors</h1>
+</header>
+<main>
+  <a href="/authors/author-form">
+    <i>Add a new author</i>
+  </a>
+
+  <table>
+    <thead>
+    <tr>
+      <th>Name</th>
+      <th>Surame</th>
+      <th>Country</th>
+      <th>Biography</th>
+      <th> Actions </th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="author : ${authors}">
+      <td th:text="${author.getName()}"></td>
+      <td th:text="${author.getSurname()}"></td>
+      <td th:text="${author.getCountry()}"></td>
+      <td th:text="${author.getBiography()}"></td>
+      <td>
+        <a th:href="@{'/authors/author-form/{id}' (id=${author.getId()})}">
+          <i>Edit</i>
+        </a>
+        <form th:action="@{'/authors/delete/{id}' (id=${author.getId()})}"
+              th:method="DELETE">
+          <button type="submit">
+            Delete
+          </button>
+        </form>
+
+      </td>
+    </tr>
+    </tbody>
+  </table>
+
+</main>
+</body>
+</html>

@@ -24,4 +24,27 @@ public class AuthorServiceImpl implements AuthorService {
     public Author findById(Long id) {
         return authorRepository.findById(id);
     }
+
+    @Override
+    public void delete(Long id) {
+        authorRepository.delete(id);
+    }
+
+    @Override
+    public Author create(String name, String surname, String country, String biography) {
+        Author author = new Author(name, surname, country, biography);
+        authorRepository.save(author);
+        return author;
+    }
+
+    @Override
+    public Author update(Long id, String name, String surname, String country, String biography) {
+        Author author = authorRepository.findById(id);
+        author.setBiography(biography);
+        author.setCountry(country);
+        author.setName(name);
+        author.setSurname(surname);
+        authorRepository.save(author);
+        return author;
+    }
 }

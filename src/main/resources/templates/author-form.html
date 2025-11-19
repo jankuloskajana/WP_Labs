@@ -1,0 +1,38 @@
+<form method="post" th:action="@{${author != null} ? '/authors/edit/' + ${author.id} : '/authors/add'}">
+  <div>
+    <label for="name">Name</label>
+    <input type="text"
+           id="name"
+           name="name"
+           th:value="${author != null ? author.name : ''}"
+           required>
+  </div>
+
+  <div>
+    <label for="surname">Surname</label>
+    <input type="text"
+           id="surname"
+           name="surname"
+           th:value="${author != null ? author.surname : ''}"
+           required>
+  </div>
+
+  <div>
+    <label for="country">Country</label><br/>
+    <input type="text"
+           id="country"
+           name="country"
+           th:value="${author != null ? author.country : ''}"
+           required>
+  </div>
+  <div>
+    <label for="biography">Biography</label><br/>
+    <input type="text"
+           id="biography"
+           name="biography"
+           th:value="${author != null ? author.biography : ''}"
+           required>
+  </div>
+
+  <button id="submit" type="submit">Submit</button>
+</form>
