@@ -1,15 +1,15 @@
 package mk.ukim.finki.wp.lab.service.impl;
 
 import mk.ukim.finki.wp.lab.model.Reservation;
-import mk.ukim.finki.wp.lab.repository.ReservationRepository;
+import mk.ukim.finki.wp.lab.repository.mock.InMemoryReservationRepository;
 import mk.ukim.finki.wp.lab.service.ReservationService;
 import org.springframework.stereotype.Service;
 
 @Service
 public class ReservationServiceImpl implements ReservationService {
-    private final ReservationRepository reservationRepository;
+    private final InMemoryReservationRepository reservationRepository;
 
-    public ReservationServiceImpl(ReservationRepository reservationRepository) {
+    public ReservationServiceImpl(InMemoryReservationRepository reservationRepository) {
         this.reservationRepository = reservationRepository;
     }
 

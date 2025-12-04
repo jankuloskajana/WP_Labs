@@ -38,8 +38,19 @@
 </header>
 <main>
     <form action="/books" method="GET">
-        <input type="text" name="search" placeholder="Enter title or rating" th:value="${param.search}">
+        <!--
+         <input type="text" name="search" placeholder="Enter title or rating" th:value="${param.search}">
         <input type="submit" value="search">
+         -->
+            <h2>Filter books by author:</h2>
+        <select name="filterAuthorId">
+            <option value="-1">-- Select Author --</option>
+            <option th:each="author : ${authors}"
+                    th:value="${author.id}"
+                    th:text="${author.name} + ' ' + ${author.surname}">
+            </option>
+        </select>
+            <button type="submit">Filter</button>
     </form>
     <h2>Choose a book:</h2>
     <!-- Display radio buttons for each book,

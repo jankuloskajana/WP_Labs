@@ -1,7 +1,7 @@
-package mk.ukim.finki.wp.lab.repository;
+package mk.ukim.finki.wp.lab.repository.mock;
 
 import mk.ukim.finki.wp.lab.model.Reservation;
 
-public interface ReservationRepository {
+public interface InMemoryReservationRepository {
     Reservation save(Reservation reservation);
 }

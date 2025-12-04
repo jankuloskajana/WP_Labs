@@ -22,25 +22,39 @@ public class BookController {
 
     @GetMapping()
     public String getBooksPage(@RequestParam(required = false) String search,
+                               @RequestParam(required = false) String filterAuthorId,
                                @RequestParam(required = false) String error, Model model){
         if (error != null) {
             model.addAttribute("error", error);
         }
 
         List<Book> books;
-        if ((search != null && !search.isEmpty())) {
-            Double rating = null;
-            String text = null;
-            try {
-                rating = Double.parseDouble(search);
-            } catch (NumberFormatException e) {
-                text = search;
-            }
-            books = bookService.searchBooks(text, rating);
-        } else {
+//        if ((search != null && !search.isEmpty())) {
+//            Double rating = null;
+//            String text = null;
+//            try {
+//                rating = Double.parseDouble(search);
+//            } catch (NumberFormatException e) {
+//                text = search;
+//            }
+//            books = bookService.searchBooks(text, rating);
+//        } else {
+//            books = bookService.listAll();
+//        }
+
+        if (filterAuthorId == null || filterAuthorId.isEmpty() || filterAuthorId.equals("-1")) {
             books = bookService.listAll();
+        } else {
+            try {
+                Long authorId = Long.parseLong(filterAuthorId);
+                books = bookService.findByAuthorId(authorId);
+            } catch (NumberFormatException e) {
+                books = bookService.listAll();
+            }
         }
         model.addAttribute("books", books);
+        model.addAttribute("authors", authorService.findAll());
+
         return "listBooks";
 
     }

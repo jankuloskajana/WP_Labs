@@ -11,4 +11,5 @@ public interface BookService {
     Book findById(Long id);
     Book create(String title, String genre,Double rating, Long authorId);
     Book update(Long id, String title, String genre, Double rating, Long authorId);
+    List<Book> findByAuthorId(Long authorId);
 }
