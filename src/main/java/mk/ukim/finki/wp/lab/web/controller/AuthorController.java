@@ -2,6 +2,7 @@ package mk.ukim.finki.wp.lab.web.controller;
 
 import mk.ukim.finki.wp.lab.model.Author;
 import mk.ukim.finki.wp.lab.service.AuthorService;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -31,17 +32,20 @@ public class AuthorController {
     }
 
     @PostMapping("/delete/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
     public String deleteAuthor(@PathVariable Long id){
         authorService.delete(id);
         return "redirect:/authors";
     }
 
     @GetMapping("/author-form")
+    @PreAuthorize("hasRole('ADMIN')")
     public String getAuthorAddForm(){
         return "author-form";
     }
 
     @PostMapping("/add")
+    @PreAuthorize("hasRole('ADMIN')")
     public String addAuthor(@RequestParam String name,
                             @RequestParam String surname,
                             @RequestParam String country,
@@ -52,6 +56,7 @@ public class AuthorController {
     }
 
     @GetMapping("/author-form/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
     public String getAuthorEditForm(@PathVariable Long id, Model model){
 
         Author author = authorService.findById(id);
@@ -66,6 +71,7 @@ public class AuthorController {
     }
 
     @PostMapping("/edit/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
     public String editAuthor(@PathVariable Long id,
                              @RequestParam String name,
                              @RequestParam String surname,

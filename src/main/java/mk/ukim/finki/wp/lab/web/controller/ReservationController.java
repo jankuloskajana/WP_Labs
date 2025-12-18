@@ -6,6 +6,7 @@ import mk.ukim.finki.wp.lab.model.Reservation;
 import mk.ukim.finki.wp.lab.service.AuthorService;
 import mk.ukim.finki.wp.lab.service.BookService;
 import mk.ukim.finki.wp.lab.service.ReservationService;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -21,6 +22,7 @@ public class ReservationController {
     }
 
     @PostMapping()
+    @PreAuthorize("isAuthenticated()")
     public String reserve(@RequestParam String bookTitle,
                           @RequestParam String readerName,
                           @RequestParam String readerAddress,
@@ -47,6 +49,7 @@ public class ReservationController {
 
 
     @GetMapping()
+    @PreAuthorize("isAuthenticated()")
     public String reservationConfirmation(@RequestParam(required = false) String error,
                                           @RequestParam(required = false) String readerName,
                                           @RequestParam(required = false) String bookTitle,
